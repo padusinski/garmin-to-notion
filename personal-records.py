@@ -235,11 +235,15 @@ def write_new_record(client, database_id, activity_date, activity_type, activity
         print(f"Error writing new record: {e}")
 
 def main():
+    garmin_email = os.getenv("GARMIN_EMAIL")
+    garmin_password = os.getenv("GARMIN_PASSWORD")
     garmin_cookie = os.getenv("GARMIN_COOKIE")
     notion_token = os.getenv("NOTION_TOKEN")
     database_id = os.getenv("NOTION_PR_DB_ID")
 
-    garmin = Garmin(cookie=garmin_cookie)
+    garmin = Garmin(garmin_email, garmin_password)
+    garmin.login()
+    garmin.garth.session.headers.update({"cookie": os.getenv("GARMIN_COOKIE")})
 
     client = Client(auth=notion_token)
 
