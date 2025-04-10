@@ -1,4 +1,4 @@
-opename: Sync Garmin to Notion
+name: Sync Garmin to Notion
 
 on:
   schedule:
