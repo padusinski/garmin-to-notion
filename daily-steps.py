@@ -93,11 +93,16 @@ def main():
     load_dotenv()
 
     # Initialize Garmin and Notion clients using environment variables
+    garmin_email = os.getenv("GARMIN_EMAIL")
+    garmin_password = os.getenv("GARMIN_PASSWORD")
     garmin_cookie = os.getenv("GARMIN_COOKIE")
     notion_token = os.getenv("NOTION_TOKEN")
     database_id = os.getenv("NOTION_STEPS_DB_ID")
 
     # Initialize Garmin client and login
+    garmin = Garmin(garmin_email, garmin_password)
+    garmin.login()
+    garmin.garth.session.headers.update({"cookie": os.getenv("GARMIN_COOKIE")})
     garmin = Garmin(cookie=garmin_cookie)
     client = Client(auth=notion_token)
 
